@@ -1,0 +1,34 @@
+2026-05-06 10:15:54,459 - INFO - Mock get_api_token generated: 7d306327-d5f7-42b1-b355-f56627b0dd53
+2026-05-06 10:16:38,463 - INFO - Mock create_user called for username: jarvis
+2026-05-06 10:16:43,894 - INFO - Mock login_user called for username: jarvis
+2026-05-06 11:24:34,332 - INFO - Mock get_api_token generated: f69dd4f9-4be9-43bf-af03-c2190d56f765
+2026-05-06 11:24:49,188 - INFO - Mock login_user called for username: jarvis
+2026-05-06 12:38:00,666 - INFO - Mock get_api_token generated: 15a94a83-6a24-4d6f-ad6a-c7f175755e5a
+2026-05-06 12:38:09,302 - INFO - Mock login_user called for username: jarvis
+2026-05-08 18:21:34,386 - INFO - Mock get_api_token generated: 18fc9390-52fe-44de-b555-edbf846620fc
+2026-05-09 10:27:44,440 - INFO - Mock get_api_token generated: 6b0f78b2-229d-4f55-8947-5562938d2669
+2026-05-09 10:30:02,087 - INFO - Mock login_user called for username: jarvis
+2026-05-09 10:33:48,843 - INFO - Mock get_api_token generated: ff1aa334-0595-4d79-ba94-e466a6badd4c
+2026-05-09 10:33:57,098 - INFO - Mock login_user called for username: jarvis
+2026-05-09 11:37:00,667 - INFO - Mock get_api_token generated: f7c4acb0-6735-4d96-bce0-da201e589277
+2026-05-09 11:37:20,679 - INFO - Mock get_api_token generated: 56b78681-1e53-4501-9a5c-77f85496f39b
+2026-05-09 11:37:51,807 - INFO - Mock create_user called for username: jarvisss
+2026-05-09 11:37:57,974 - INFO - Mock login_user called for username: jarvisss
+2026-05-09 11:42:12,599 - INFO - Mock get_api_token generated: a108a568-d7b3-41fb-8d0c-234a0d582362
+2026-05-09 11:42:27,407 - ERROR - Register failed: Internal Server Error
+2026-05-09 11:42:37,888 - ERROR - Register failed: Internal Server Error
+2026-05-09 11:43:02,681 - ERROR - Register failed: Internal Server Error
+2026-05-09 11:43:05,262 - ERROR - Register failed: Internal Server Error
+2026-05-09 11:43:05,935 - ERROR - Register failed: Internal Server Error
+2026-05-09 11:43:06,115 - ERROR - Register failed: Internal Server Error
+2026-05-09 11:43:06,303 - ERROR - Register failed: Internal Server Error
+2026-05-09 11:43:06,520 - ERROR - Register failed: Internal Server Error
+2026-05-09 11:49:01,752 - INFO - Mock get_api_token generated: 5e153e4e-e7e4-4736-b9a2-78eeb81457db
+2026-05-09 11:57:51,376 - INFO - Mock get_api_token generated: 63886ed8-7a6c-444d-b5ab-0d6ac44dac33
+2026-05-09 11:58:04,762 - ERROR - Login failed: {"detail":"Incorrect email or password"}
+2026-05-09 11:59:46,188 - ERROR - Register failed: {"detail":"Email already registered"}
+2026-05-09 11:59:47,560 - ERROR - Register failed: {"detail":"Email already registered"}
+2026-05-09 11:59:51,518 - INFO - Mock get_api_token generated: 70148941-50e9-4109-b6a7-846d0921f0ed
+2026-05-09 12:03:53,896 - INFO - Mock get_api_token generated: 4c0c8e43-2c48-4d2c-8634-1b63f2b52443
+2026-05-09 12:09:52,319 - INFO - Mock get_api_token generated: 25bd8277-6ffb-45cb-8a1d-de003546c873
+2026-05-09 12:16:23,798 - INFO - Mock get_api_token generated: c97181d3-68e3-46c6-a90e-c31eea21f1b6
