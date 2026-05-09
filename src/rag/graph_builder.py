@@ -48,7 +48,7 @@ def query_classifier(state: State):
     print("result received is in query classifier")
     print(result.route)
 
-    return {"messages": state["messages"], "route": result.route, "latest_query": question, "retry_count": 0}
+    return {"route": result.route, "latest_query": question, "retry_count": 0}
 
 
 def general_llm(state: State):
@@ -125,7 +125,7 @@ def grade(state: State):
     result = chain_graded.invoke({"question": question, "context": context})
 
     print(result)
-    return {"messages": state["messages"], "binary_score": result.binary_score}
+    return {"binary_score": result.binary_score}
 
 
 def rewrite_query(state: State):
@@ -166,14 +166,15 @@ def generate(state: State):
         dict: Generated response.
     """
     context = state["messages"][-1].content
+    question = state["latest_query"]
 
     generate_prompt = PromptTemplate(
         template=config.prompt("generate_prompt"),
-        input_variables=["context"]
+        input_variables=["context", "question"]
     )
 
     generate_chain = generate_prompt | llm
-    result = generate_chain.invoke({"context": context})
+    result = generate_chain.invoke({"context": context, "question": question})
 
     return {"messages": [{"role": "assistant", "content": result.content}]}
 

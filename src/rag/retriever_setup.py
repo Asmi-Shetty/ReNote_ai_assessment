@@ -3,6 +3,7 @@ Retriever setup and vector store configuration.
 """
 
 import os
+import atexit
 
 from langchain_core.documents import Document
 from langchain_core.tools import create_retriever_tool
@@ -17,6 +18,7 @@ embeddings = OpenAIEmbeddings()
 
 # Initialize Qdrant Client in Serverless Local Mode (No Docker required)
 qdrant_client = QdrantClient(path="./qdrant_storage")
+atexit.register(qdrant_client.close)
 
 # Ensure collection exists
 try:

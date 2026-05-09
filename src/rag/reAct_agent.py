@@ -4,7 +4,7 @@ ReAct agent setup for document retrieval and question answering.
 
 import os
 
-from langchain.agents import create_react_agent, AgentExecutor
+from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate
 
 from src.config.settings import Config
@@ -15,7 +15,7 @@ config = Config()
 
 def get_agent_executor(user_id: str) -> AgentExecutor:
     """
-    Get a user-scoped ReAct agent executor.
+    Get a user-scoped tool-calling agent executor.
     
     Args:
         user_id: The ID of the authenticated user.
@@ -33,15 +33,15 @@ def get_agent_executor(user_id: str) -> AgentExecutor:
     else:
         description = None
 
-    # Create ReAct agent prompt
+    # Create agent prompt
     prompt = ChatPromptTemplate.from_messages([
         ("system", config.prompt("system_prompt")),
         ("human", "{input}"),
-        ("ai", "{agent_scratchpad}")
+        ("placeholder", "{agent_scratchpad}")
     ])
 
-    # Initialize the ReAct agent and executor
-    react_agent = create_react_agent(llm, tools, prompt)
+    # Initialize the tool-calling agent and executor
+    react_agent = create_tool_calling_agent(llm, tools, prompt)
     agent_executor = AgentExecutor(
         agent=react_agent,
         tools=tools,

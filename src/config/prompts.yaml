@@ -1,19 +1,11 @@
 prompts:
   system_prompt: |
-    You are a helpful AI agent.
-    You MUST use tools to answer the question. Never answer directly.
-    Always follow this format exactly:
-    Thought: <your reasoning>
-    Action: <tool name>
-    Action Input: <input to the tool>
-    Wait for the tool result before giving a Final Answer.
-    Final Answer: <your answer based on tool result>
-    Available tools:
-    {tools}
-    Tool names: {tool_names}
+    You are a helpful AI assistant connected to a document retrieval system.
+    You MUST use the provided tools to retrieve information from the document to answer the user's question.
+    NEVER answer directly from general knowledge. If the answer is not in the document, state that clearly.
 
   classify_prompt: |
-    You are a strict query classifier.
+    You are a strict query classifier for a document question-answering system.
     
     You will receive:
     - A user question
@@ -21,21 +13,18 @@ prompts:
     
     Your task is to classify the question into exactly one of these three categories:
     
-    1. "index" – Choose this if the provided context is relevant and contains enough information to answer the question.
-    2. "general" – Choose this if the context is NOT relevant, but the question can still be answered using general/common knowledge or casual conversation.
-    3. "search" – Choose this if the context is NOT relevant AND the question cannot be answered from common knowledge (e.g., requires real-time information, niche facts, or external lookup).
+    1. "index" – Choose this if the question is asking for information that might be in the uploaded documents. This is the default choice for ANY informational, technical, or specific queries, even if the context seems empty right now (we will search properly later).
+    2. "general" – Choose this ONLY for pure conversational pleasantries (e.g., "hi", "how are you", "thanks"). Do not choose this for any factual questions.
+    3. "search" – Choose this ONLY if the question explicitly asks for a web search or live internet data.
     
     Priority:
-    - Always choose "index" when relevant context exists, no matter what.
-    - If context is NOT relevant:
-        * If it’s a casual conversation or a question that can be answered using general world knowledge, choose "general".
-        * Only choose "search" when the answer requires real-time, external, or missing knowledge that cannot be inferred from general knowledge.
+    - ALWAYS choose "index" for ANY question that seeks information, facts, or details. We want to answer from the uploaded documents.
+    - NEVER choose "general" for factual questions, even if you know the answer from general knowledge.
     
     ---
     Question: {question}
     Context: {context}
     ---
-    Classification:
 
   grading_prompt: |
     You are a grader. You are given a question and context from our indexed knowledge base.
@@ -52,10 +41,12 @@ prompts:
     You just have to rewrite the query so that we could get more accurate and suitable answer from our indexed information database.
 
   generate_prompt: |
-    You are a beautiful answer generator. You are given a context.
+    You are a strict answer generator. You are given a question and a context.
+    question: {question}
     context: {context}
-    You need to generate the final answer based on the given context,
-    which would be easily readable and understandable by the user.
+    You MUST generate the final answer based ONLY on the provided context.
+    Do not use outside general knowledge. If the context does not contain the answer, state that clearly.
+    Ensure the answer is easily readable and understandable by the user.
 
   verify_prompt: |
     You are a strict fact checker.

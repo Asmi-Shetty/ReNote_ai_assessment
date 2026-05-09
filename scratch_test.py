@@ -1,13 +1,51 @@
-import asyncio
-from src.api.auth import register
-from src.models.user import UserCreate
+from langchain_core.documents import Document
+from langchain_openai import OpenAIEmbeddings
+from langchain_qdrant import QdrantVectorStore
+from langchain_core.tools import create_retriever_tool
+from qdrant_client import QdrantClient
+from qdrant_client.http import models as rest
 
-async def run():
-    try:
-        user = UserCreate(username='testuser', email='test@test.com', password='password')
-        await register(user)
-    except Exception:
-        import traceback
-        traceback.print_exc()
+def test_tool_invoke():
+    # Use in-memory Qdrant
+    qdrant_client = QdrantClient(location=":memory:")
+    
+    qdrant_client.create_collection(
+        collection_name="test_collection",
+        vectors_config=rest.VectorParams(
+            size=1536,  # OpenAI embeddings size
+            distance=rest.Distance.COSINE
+        )
+    )
+    
+    embeddings = OpenAIEmbeddings()
+    vectorstore = QdrantVectorStore(
+        client=qdrant_client,
+        collection_name="test_collection",
+        embedding=embeddings,
+    )
+    
+    doc = Document(page_content="The candidate's name is John Doe and he lives in New York.", metadata={"user_id": "test_user_id"})
+    vectorstore.add_documents([doc])
+    
+    user_filter = rest.Filter(
+        must=[
+            rest.FieldCondition(
+                key="metadata.user_id",
+                match=rest.MatchValue(value="test_user_id")
+            )
+        ]
+    )
+    
+    retriever = vectorstore.as_retriever(search_kwargs={"filter": user_filter})
+    retriever_tool = create_retriever_tool(
+        retriever,
+        "retriever_test",
+        "description"
+    )
+    
+    result = retriever_tool.invoke("What is the candidate's name?")
+    print("Tool invoke result type:", type(result))
+    print("Tool invoke result content:", repr(result))
 
-asyncio.run(run())
+if __name__ == "__main__":
+    test_tool_invoke()

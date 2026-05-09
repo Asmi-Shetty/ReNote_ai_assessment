@@ -35,10 +35,17 @@ async def rag_query(
 
     # Fetch full history
     messages = await chat_history.get_messages()
-    result = builder.invoke({
-        "messages": messages,
-        "user_id": current_user.id
-    })
+    try:
+        result = builder.invoke({
+            "messages": messages,
+            "user_id": current_user.id
+        })
+    except Exception as e:
+        import traceback
+        with open("error.log", "a") as f:
+            f.write(traceback.format_exc() + "\n")
+        raise e
+        
     output_text = result["messages"][-1].content
 
     # Save assistant message
