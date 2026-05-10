@@ -65,19 +65,6 @@ def documents(description: str, file: UploadFile, user_id: str):
     finally:
         os.unlink(tmp_path)
 
-    # Enhance description using LLM
-    description_llm = enhance_description_with_llm(description)
-
-    # Save enhanced description
-    # Note: In a true multi-tenant system, this should be stored per user/document in MongoDB.
-    # For now, we update it in the file system or could ignore if we want per-user prompts.
-    with open("description.txt", "w", encoding="utf-8") as f:
-        f.write(description_llm)
-
-    with open("description.txt", "r", encoding="utf-8") as f:
-        print("Document description from storage:")
-        print(f.read())
-
     # Split documents into chunks
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000,

@@ -94,18 +94,11 @@ def get_retriever(user_id: str):
 
         retriever = vectorstore.as_retriever(search_kwargs={"filter": user_filter})
 
-        # Load document description
-        if os.path.exists("description.txt"):
-            with open("description.txt", "r", encoding="utf-8") as f:
-                description = f.read()
-        else:
-            description = "uploaded customer documents"
-
         retriever_tool = create_retriever_tool(
             retriever,
             "retriever_customer_uploaded_documents",
-            f"Use this tool **only** to answer questions about: {description}\n"
-            "Don't use this tool to answer anything else."
+            "Use this tool to search for specific information within the documents uploaded by the user. "
+            "Always use this tool when the user asks questions about their uploaded files or content."
         )
 
         return retriever_tool
