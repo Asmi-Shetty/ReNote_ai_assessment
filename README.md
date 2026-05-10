@@ -129,7 +129,7 @@ The system intelligently adapts its retrieval strategy based on query type, util
 ```bash
 # Clone the repository
 git clone https://github.com/Asmi-Shetty/ReNote_ai_assessment.git
-cd Adaptive-Rag
+cd ReNote_ai_assessment
 
 # Create virtual environment
 python -m venv venv
@@ -240,23 +240,3 @@ Query Classification
 
 ---
 
-
-
-## 📚 Technology Stack
-
-| Component | Technology | Version |
-|-----------|-----------|---------|
-| **LLM Framework** | LangChain | ~0.3.27 |
-| **Workflow Orchestration** | LangGraph | ~0.5.4 |
-| **Web Framework** | FastAPI | Latest |
-| **ASGI Server** | Uvicorn | Latest |
-| **UI Framework** | Streamlit | Latest |
-| **Vector Database** | Qdrant/FAISS | Latest |
-| **Chat Database** | MongoDB/InMemory | Latest |
-| **Document Processing** | LangChain Community | ~0.3.27 |
-| **LLM Provider** | OpenAI | ~0.3.28 |
-| **Web Search** | Tavily | Latest |
-| **Async DB** | Motor | Latest |
-| **Data Validation** | Pydantic | ~2.11.7 |
-
----
