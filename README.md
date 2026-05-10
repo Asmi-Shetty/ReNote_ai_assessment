@@ -237,26 +237,6 @@ Query Classification
   "query": "What is machine learning?",
   "session_id": "test_user_1"
 }
-```
-
----
-
-## 🚀 Deployment
-
-### Local Development
-```bash
-# Run development server with auto-reload
-python -m uvicorn src.main:app --reload
-```
-
-### Production Deployment
-```bash
-# Run with production settings
-python -m uvicorn src.main:app --host 0.0.0.0 --port 8000 --workers 4
-```
-
-### Docker Support (Optional)
-Create `Dockerfile` and `docker-compose.yml` for containerized deployment.
 
 ---
 
